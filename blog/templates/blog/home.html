@@ -1,0 +1,14 @@
+<!-- templates/template/home.html -->
+{% extends "blog/base.html" %}
+
+<!-- templates/blog/home.html -->
+% extends "base.html"
+
+{% block content %}
+{% for post in post_list %}
+    <div class="post-entry">
+        <h2><a href="{% url 'post_detail' post.pk %}">{{ post.title}}</a></h2>
+        <p>{{ post.body }}</p>
+    </div>
+{% endfor %}
+{% endblock content %}
