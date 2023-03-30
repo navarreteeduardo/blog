@@ -2,27 +2,35 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Django blog</title>
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400"
-        rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/base.css' %}">
-</head>
-    <body>
-        <div>
-            <header>
-                <div class="nav-left">
-                    <h1><a href="{% url 'home' %}">Django blog</a></h1>
-                </div>
-                <div class="nav-right">
-                    <a href="{% url 'post_new' %}">+ New Blog Post</a>
-                </div>
-            </header>
-            {% block content %}
-            {% endblock content %}
+    <link
+      href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400"
+      rel="stylesheet"
+    />
+    <link href="{% static 'css/base.css' %}" rel="stylesheet" />
+  </head>
+  <body>
+    <div>
+      <header>
+        <div class="nav-left">
+          <h1><a href="{% url 'home' %}">Django blog</a></h1>
         </div>
-    </body>
+        <div class="nav-right">
+          <a href="{% url 'post_new' %}">+ New Blog Post</a>
+        </div>
+      </header>
+      {% if user.is_authenticated %}
+      <p>Hi, {{ user.first_name }}</p>
+      <p><a href="{% url 'logout' %}">Log out</a></p>
+      {% else %}
+      <p>You Are not logged in.</p>
+      <a href="{% url 'login' %}">Log In</a>|
+      <a href="{% url 'signup' %}">Sign Up</a>
+      {% endif %} {% block content %} {% endblock content %}
+    </div>
+  </body>
 </html>
